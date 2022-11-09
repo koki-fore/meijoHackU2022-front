@@ -1,21 +1,101 @@
-import React from 'react'
-import { Heading, Input, InputGroup, Text } from '@chakra-ui/react'
-import PasswordInput from '../components/PasswordInput'
-import { Button } from '@chakra-ui/react'
+import { useState } from "react";
+import {
+  Flex,
+  Heading,
+  Input,
+  Button,
+  InputGroup,
+  Stack,
+  InputLeftElement,
+  chakra,
+  Box,
+  Link,
+  Avatar,
+  FormControl,
+  FormHelperText,
+  InputRightElement
+} from "@chakra-ui/react";
+import { FaUserAlt, FaLock } from "react-icons/fa";
 
-const SignUp: React.FC = () => {
-    return (
-        <>
-            <Heading>ユーザー登録</Heading>
-            <InputGroup>
-                <Text>メールアドレス</Text>
-                <Input placeholder='aaaa@gmail.com' />
-                <Text>パスワード</Text>
-                <PasswordInput />
-                <Button colorScheme='teal' variant='solid' >
-                    サインアップ
-                </Button>
-            </InputGroup>
-        </>
-    )
-}; export default SignUp;
+const CFaUserAlt = chakra(FaUserAlt);
+const CFaLock = chakra(FaLock);
+
+const SignUp = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowClick = () => setShowPassword(!showPassword);
+
+  return (
+    <Flex
+      flexDirection="column"
+      backgroundColor="gray.200"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Stack
+        flexDir="column"
+        mb="2"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Avatar bg="teal.500" />
+        <Heading color="teal.400">Welcome</Heading>
+        <Box minW={{ base: "90%", md: "468px" }}>
+          <form>
+            <Stack
+              spacing={4}
+              p="1rem"
+              backgroundColor="whiteAlpha.900"
+              boxShadow="md"
+            >
+              <FormControl>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<CFaUserAlt color="gray.300" />}
+                  />
+                  <Input type="email" placeholder="email address" />
+                </InputGroup>
+              </FormControl>
+              <FormControl>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    color="gray.300"
+                    children={<CFaLock color="gray.300" />}
+                  />
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+                      {showPassword ? "Hide" : "Show"}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <Button
+                borderRadius={0}
+                type="submit"
+                variant="solid"
+                colorScheme="teal"
+                width="full"
+              >
+                Sign up
+              </Button>
+            </Stack>
+          </form>
+        </Box>
+      </Stack>
+      <Box>
+        New to us?{" "}
+        <Link color="teal.500" href="login">
+          Login
+        </Link>
+      </Box>
+    </Flex>
+  );
+};
+
+export default SignUp;

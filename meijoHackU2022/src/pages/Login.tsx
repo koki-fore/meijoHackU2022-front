@@ -20,7 +20,7 @@ import { FaUserAlt, FaLock } from "react-icons/fa";
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const App = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
@@ -28,6 +28,7 @@ const App = () => {
   return (
     <Flex
       flexDirection="column"
+      minH={'100vh'}
       width="100wh"
       height="100vh"
       backgroundColor="gray.200"
@@ -103,4 +104,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Login;

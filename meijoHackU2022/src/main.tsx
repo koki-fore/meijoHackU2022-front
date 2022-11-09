@@ -6,6 +6,7 @@ import App from './App'
 import './index.css'
 
 import SignUp from './pages/SignUp'
+import Login from './pages/Login'
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -14,7 +15,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<App />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route path='/SignUp' element={<SignUp />} />
+        <Route path='/Login' element={<Login />} />
         </Routes>
       </BrowserRouter>
       

@@ -24,6 +24,15 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data:FormData = new FormData(event.currentTarget);
+
+    // テキストボックスからメールアドレスとパスワードを取得
+    const email = data.get("email");
+    const password = data.get("password");
+    console.log(email, password)
+  }
 
   return (
     <Flex
@@ -41,7 +50,7 @@ const SignUp = () => {
         <Avatar bg="teal.500" />
         <Heading color="teal.400">Welcome</Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Stack
               spacing={4}
               p="1rem"
@@ -54,7 +63,7 @@ const SignUp = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input type="email" placeholder="email address" id='email' name="email"/>
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -67,6 +76,8 @@ const SignUp = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
+                    id="password"
+                    name="password"
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>

@@ -16,21 +16,33 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import firebase from "../firebaseConfig";
+
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const SignUp = () => {
+  // const auth = getAuth(firebase)
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
   const handleShowClick = () => setShowPassword(!showPassword);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault()
-    const data:FormData = new FormData(event.currentTarget);
-
-    // テキストボックスからメールアドレスとパスワードを取得
-    const email = data.get("email");
-    const password = data.get("password");
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed in 
+    //     const user = userCredential.user;
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // ..
+    //   });
     console.log(email, password)
   }
 
@@ -63,7 +75,7 @@ const SignUp = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" id='email' name="email"/>
+                  <Input type="email" placeholder="email address" id='email' name="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -78,6 +90,8 @@ const SignUp = () => {
                     placeholder="Password"
                     id="password"
                     name="password"
+                    value={password} 
+                    onChange={(e) => {setPassword(e.target.value)}}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>

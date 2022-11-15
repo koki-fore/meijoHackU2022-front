@@ -23,3 +23,5 @@ typesyncを入れていないと ```npm install```ではじかれる
 ```bash
 npm install -g typesync
 ```
+### Branches
+feature/camelCase

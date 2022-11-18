@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import auth from "../firebase";
+import auth from "../firebaseEnv";
 
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -31,18 +31,17 @@ const SignUp = () => {
   const handleShowClick = () => setShowPassword(!showPassword);
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault()
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed in 
-    //     const user = userCredential.user;
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     // ..
-    //   });
-    console.log(import.meta.env.VITE_API_KEY)
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
     console.log(email, password)
   }
 

@@ -16,15 +16,14 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebase from "../firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../firebaseConfig";
 
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const SignUp = () => {
-  // const auth = getAuth(firebase)
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -43,6 +42,7 @@ const SignUp = () => {
     //     const errorMessage = error.message;
     //     // ..
     //   });
+    console.log(auth)
     console.log(email, password)
   }
 

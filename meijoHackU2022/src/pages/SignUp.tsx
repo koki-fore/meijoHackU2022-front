@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import auth from "../firebaseConfig";
+import auth from "../firebase";
 
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -42,7 +42,7 @@ const SignUp = () => {
     //     const errorMessage = error.message;
     //     // ..
     //   });
-    console.log(auth)
+    console.log(import.meta.env.VITE_API_KEY)
     console.log(email, password)
   }
 

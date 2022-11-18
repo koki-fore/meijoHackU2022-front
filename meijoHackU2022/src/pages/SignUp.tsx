@@ -42,7 +42,6 @@ const SignUp = () => {
         const errorMessage = error.message;
         // ..
       });
-    console.log(email, password)
   }
 
   return (

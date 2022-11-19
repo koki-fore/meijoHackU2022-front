@@ -16,37 +16,42 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebaseEnv";
-
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const SignUp = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-
+  
   const handleShowClick = () => setShowPassword(!showPassword);
+
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault()
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+    // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode)
+    });
   }
 
   return (
     <Flex
       flexDirection="column"
+      minH={'100vh'}
+      width="100wh"
+      height="100vh"
       backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
@@ -97,6 +102,9 @@ const SignUp = () => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
+                <FormHelperText textAlign="right">
+                  <Link>forgot password?</Link>
+                </FormHelperText>
               </FormControl>
               <Button
                 borderRadius={0}
@@ -105,7 +113,7 @@ const SignUp = () => {
                 colorScheme="teal"
                 width="full"
               >
-                Sign up
+                Login
               </Button>
             </Stack>
           </form>
@@ -113,12 +121,12 @@ const SignUp = () => {
       </Stack>
       <Box>
         New to us?{" "}
-        <Link color="teal.500" href="login">
-          Login
+        <Link color="teal.500" href="#">
+          Sign Up
         </Link>
       </Box>
     </Flex>
   );
 };
 
-export default SignUp;
+export default Login;

@@ -8,12 +8,12 @@ import { FC } from 'react';
 import theme from '../theme'
 import { 
     BsFillPersonFill,
- } from 'react-icons/Bs';
+ } from 'react-icons/bs';
 import {
     FaSearch,
     FaList,
     FaHome
-} from 'react-icons/Fa';
+} from 'react-icons/fa';
 
 
 const Footer: FC = () => {

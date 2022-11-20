@@ -10,7 +10,7 @@ import theme from '../theme'
 const Header: FC = () => {
     const experience = 10  
     return (
-        <Box bgColor={theme.colors.brand.main} style={{display:'flex'}} >
+        <Box bgColor={theme.colors.main} style={{display:'flex'}} >
             <img src={avatar} />
             <Text pl={1} fontSize='3xl'>
                 Lv.{experience}

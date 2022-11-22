@@ -9,8 +9,8 @@ import {
 
 
 const postButtonStyle = {
-  bottom:'1rem',
-  right:'1rem',
+  bottom:'5rem',
+  right:'1.6rem',
   width:'4rem',
   height:'4rem',
   borderRadius:'2rem',

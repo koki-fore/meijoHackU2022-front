@@ -16,10 +16,15 @@ import {
 } from 'react-icons/fa';
 
 
+const footerStyle = {
+    bottom:'0',
+    width:'100%'
+}
+
 const Footer: FC = () => {
     const experience = 10  
     return (
-        <Box bgColor={theme.colors.main} >
+        <Box bgColor={theme.colors.main} style={{...footerStyle}} pos='absolute'>
             <Grid  templateColumns='repeat(8, 1fr)'>
                 <GridItem colSpan={2}><FaHome size={'2rem'} style={{margin:'0 auto'}} />ホーム</GridItem>
                 <GridItem colSpan={2}><BsFillPersonFill size={'2rem'} style={{margin:'0 auto'}} />マイページ</GridItem>

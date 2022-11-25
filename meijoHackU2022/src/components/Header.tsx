@@ -43,6 +43,7 @@ const Header: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const experience = 10;  //仮置き
+  const userName = '名前名前'
   return (
     <>
       <Box bg={useColorModeValue(theme.colors.main, 'gray.900')} px={4}>
@@ -83,7 +84,7 @@ const Header: FC = () => {
                   </Center>
                   <br />
                   <Center>
-                    <p>Username</p>
+                    <p> {userName} </p>
                   </Center>
                   <br />
                   <MenuDivider />

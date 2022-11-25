@@ -1,18 +1,18 @@
 import {
     Box,
+    Container,
+    Stack,
     Text,
-    Grid,
-    GridItem,
-} from '@chakra-ui/react';
+    Link,
+    useColorModeValue,
+  } from '@chakra-ui/react';
 import { FC } from 'react';
-import theme from '../theme'
-import { 
-    BsFillPersonFill,
- } from 'react-icons/bs';
+import theme from '../theme';
 import {
     FaSearch,
     FaList,
-    FaHome
+    FaHome,
+    FaUser
 } from 'react-icons/fa';
 
 
@@ -22,17 +22,31 @@ const footerStyle = {
 }
 
 const Footer: FC = () => {
-    const experience = 10  
+    const experience = 10  //仮置き
     return (
-        <Box bgColor={theme.colors.main} style={{...footerStyle}} pos='absolute'>
-            <Grid  templateColumns='repeat(8, 1fr)'>
-                <GridItem colSpan={2}><FaHome size={'2rem'} style={{margin:'0 auto'}} />ホーム</GridItem>
-                <GridItem colSpan={2}><BsFillPersonFill size={'2rem'} style={{margin:'0 auto'}} />マイページ</GridItem>
-                <GridItem colSpan={2}><FaList size={'2rem'} style={{margin:'0 auto'}} />タスク</GridItem>
-                <GridItem colSpan={2}><FaSearch size={'2rem'} style={{margin:'0 auto'}} />検索</GridItem>
-            </Grid>
-        </Box>
+      <Box
+        bg={useColorModeValue(theme.colors.main, 'gray.900')}
+        color={useColorModeValue('gray.700', 'gray.200')}
+        style={{...footerStyle}} 
+        pos='absolute'>
+        <Container
+          as={Stack}
+          maxW={'6xl'}
+          py={2}
+          direction={{ base: 'column', md: 'row' }}
+          spacing={2}
+          justify={{ base: 'center', md: 'space-between' }}
+          align={{ base: 'center', md: 'center' }}>
+          <Stack direction={'row'} spacing={6}>
+            <Link href={'#'}><FaHome size={'2rem'} style={{margin:'0 auto'}} />ホーム</Link>
+            <Link href={'#'}><FaUser size={'2rem'} style={{margin:'0 auto'}} />マイページ</Link>
+            <Link href={'#'}><FaList size={'2rem'} style={{margin:'0 auto'}} />タスク</Link>
+            <Link href={'#'}><FaSearch size={'2rem'} style={{margin:'0 auto'}} />検索</Link>
+          </Stack>
+          <Text>© 2022 KK. All rights reserved</Text>
+        </Container>
+      </Box>
     );
-}
+  }
 
 export default Footer;

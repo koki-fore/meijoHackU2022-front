@@ -1,37 +1,33 @@
 import { useState } from "react";
 import {
   Flex,
-  Heading,
-  Input,
-  Button,
-  InputGroup,
-  Stack,
-  InputLeftElement,
-  chakra,
   Box,
-  Link,
-  Avatar,
   FormControl,
-  FormHelperText,
-  InputRightElement
-} from "@chakra-ui/react";
-import { FaUserAlt, FaLock } from "react-icons/fa";
+  FormLabel,
+  Input,
+  InputGroup,
+  HStack,
+  InputRightElement,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Link,
+} from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebaseEnv";
 
-const CFaUserAlt = chakra(FaUserAlt);
-const CFaLock = chakra(FaLock);
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   
-  const handleShowClick = () => setShowPassword(!showPassword);
-
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault()
-
+    
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Signed in 
@@ -43,88 +39,74 @@ const Login = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode)
+      console.log(errorMessage)
     });
   }
 
   return (
     <Flex
-      flexDirection="column"
       minH={'100vh'}
-      width="100wh"
-      height="100vh"
-      backgroundColor="gray.200"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Stack
-        flexDir="column"
-        mb="2"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Avatar bg="teal.500" />
-        <Heading color="teal.400">Welcome</Heading>
-        <Box minW={{ base: "90%", md: "468px" }}>
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack align={'center'}>
+          {/* ロゴ入れる */}
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}>
           <form onSubmit={handleSubmit}>
-            <Stack
-              spacing={4}
-              p="1rem"
-              backgroundColor="whiteAlpha.900"
-              boxShadow="md"
-            >
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<CFaUserAlt color="gray.300" />}
-                  />
-                  <Input type="email" placeholder="email address" id='email' name="email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
-                </InputGroup>
+            <Stack spacing={4}>
+              <FormControl id="email" isRequired>
+                <FormLabel>メールアドレス</FormLabel>
+                <Input type="email" name="email" value={email} onChange={(e) => {setEmail(e.target.value)}}/>
               </FormControl>
-              <FormControl>
+              <FormControl id="password" isRequired>
+                <FormLabel>パスワード</FormLabel>
                 <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    color="gray.300"
-                    children={<CFaLock color="gray.300" />}
-                  />
                   <Input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    id="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     value={password} 
                     onChange={(e) => {setPassword(e.target.value)}}
                   />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                      {showPassword ? "Hide" : "Show"}
+                  <InputRightElement h={'full'}>
+                    <Button
+                      variant={'ghost'}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }>
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <FormHelperText textAlign="right">
-                  <Link>forgot password?</Link>
-                </FormHelperText>
               </FormControl>
-              <Button
-                borderRadius={0}
-                type="submit"
-                variant="solid"
-                colorScheme="teal"
-                width="full"
-              >
-                Login
-              </Button>
+              <Stack spacing={10} pt={2}>
+                <Button
+                  type="submit"
+                  loadingText="Submitting"
+                  size="lg"
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }}>
+                  ログイン
+                </Button>
+              </Stack>
+            
+              <Stack pt={6}>
+                <Text align={'center'}>
+                  ユーザー登録がまだの方は<Link color={'blue.400'}>こちら</Link>
+                </Text>
+              </Stack>
             </Stack>
           </form>
         </Box>
       </Stack>
-      <Box>
-        New to us?{" "}
-        <Link color="teal.500" href="#">
-          Sign Up
-        </Link>
-      </Box>
     </Flex>
   );
 };
